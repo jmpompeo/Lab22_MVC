@@ -1,0 +1,51 @@
+﻿@model Lab22.Models.MovieGenreModel
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<h1>Movies</h1>
+
+<form asp-controller="Movie" asp-action="Index" method="get">
+    <p>
+        Genre: <select asp-for="Genre" asp-items="Model.Genres">
+                    <option value="">All</option>
+                </select>
+
+        Title: <input type="text" asp-for="Search" />
+        <input type="submit" value="filter" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies[0].Genre)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Movies)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.Genre)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
